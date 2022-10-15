@@ -18,6 +18,8 @@ target/
 *.iws
 *.iml
 *.ipr
+*.cmd
+.mvn
 
 ### NetBeans ###
 /nbproject/private/
@@ -25,6 +27,7 @@ target/
 /dist/
 /nbdist/
 /.nb-gradle/
+/mvnw/
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
