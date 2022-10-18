@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.player.movie.dao.MovieCommentDao">
+
+    <resultMap type="com.player.movie.entity.MovieComment" id="MovieCommentMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
+        <result property="topId" column="top_id" jdbcType="INTEGER"/>
+        <result property="movieId" column="movie_id" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="udateTime" column="udate_time" jdbcType="TIMESTAMP"/>
+        <result property="replyUserId" column="reply_user_id" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="MovieCommentMap">
+        select
+          id, content, parent_id, top_id, movie_id, user_id, create_time, udate_time, reply_user_id
+        from movie_comment
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="MovieCommentMap">
+        select
+          id, content, parent_id, top_id, movie_id, user_id, create_time, udate_time, reply_user_id
+        from movie_comment
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="content != null and content != ''">
+                and content = #{content}
+            </if>
+            <if test="parentId != null">
+                and parent_id = #{parentId}
+            </if>
+            <if test="topId != null">
+                and top_id = #{topId}
+            </if>
+            <if test="movieId != null">
+                and movie_id = #{movieId}
+            </if>
+            <if test="userId != null and userId != ''">
+                and user_id = #{userId}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="udateTime != null">
+                and udate_time = #{udateTime}
+            </if>
+            <if test="replyUserId != null and replyUserId != ''">
+                and reply_user_id = #{replyUserId}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from movie_comment
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="content != null and content != ''">
+                and content = #{content}
+            </if>
+            <if test="parentId != null">
+                and parent_id = #{parentId}
+            </if>
+            <if test="topId != null">
+                and top_id = #{topId}
+            </if>
+            <if test="movieId != null">
+                and movie_id = #{movieId}
+            </if>
+            <if test="userId != null and userId != ''">
+                and user_id = #{userId}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="udateTime != null">
+                and udate_time = #{udateTime}
+            </if>
+            <if test="replyUserId != null and replyUserId != ''">
+                and reply_user_id = #{replyUserId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into movie_comment(content, parent_id, top_id, movie_id, user_id, create_time, udate_time, reply_user_id)
+        values (#{content}, #{parentId}, #{topId}, #{movieId}, #{userId}, #{createTime}, #{udateTime}, #{replyUserId})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into movie_comment(content, parent_id, top_id, movie_id, user_id, create_time, udate_time, reply_user_id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.content}, #{entity.parentId}, #{entity.topId}, #{entity.movieId}, #{entity.userId}, #{entity.createTime}, #{entity.udateTime}, #{entity.replyUserId})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into movie_comment(content, parent_id, top_id, movie_id, user_id, create_time, udate_time, reply_user_id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.content}, #{entity.parentId}, #{entity.topId}, #{entity.movieId}, #{entity.userId}, #{entity.createTime}, #{entity.udateTime}, #{entity.replyUserId})
+        </foreach>
+        on duplicate key update
+        content = values(content),
+        parent_id = values(parent_id),
+        top_id = values(top_id),
+        movie_id = values(movie_id),
+        user_id = values(user_id),
+        create_time = values(create_time),
+        udate_time = values(udate_time),
+        reply_user_id = values(reply_user_id)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update movie_comment
+        <set>
+            <if test="content != null and content != ''">
+                content = #{content},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId},
+            </if>
+            <if test="topId != null">
+                top_id = #{topId},
+            </if>
+            <if test="movieId != null">
+                movie_id = #{movieId},
+            </if>
+            <if test="userId != null and userId != ''">
+                user_id = #{userId},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="udateTime != null">
+                udate_time = #{udateTime},
+            </if>
+            <if test="replyUserId != null and replyUserId != ''">
+                reply_user_id = #{replyUserId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from movie_comment where id = #{id}
+    </delete>
+
+</mapper>
+

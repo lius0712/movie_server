@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.player.movie.dao.MovieNetworkDao">
+
+    <resultMap type="com.player.movie.entity.MovieNetwork" id="MovieNetworkMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="movieId" column="movie_id" jdbcType="VARCHAR"/>
+        <result property="movieName" column="movie_name" jdbcType="VARCHAR"/>
+        <result property="director" column="director" jdbcType="VARCHAR"/>
+        <result property="star" column="star" jdbcType="VARCHAR"/>
+        <result property="type" column="type" jdbcType="VARCHAR"/>
+        <result property="countryLanguage" column="country_language" jdbcType="VARCHAR"/>
+        <result property="viewingState" column="viewing_state" jdbcType="VARCHAR"/>
+        <result property="releaseTime" column="release_time" jdbcType="VARCHAR"/>
+        <result property="plot" column="plot" jdbcType="VARCHAR"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="isRecommend" column="is_recommend" jdbcType="VARCHAR"/>
+        <result property="img" column="img" jdbcType="VARCHAR"/>
+        <result property="classify" column="classify" jdbcType="VARCHAR"/>
+        <result property="sourceName" column="source_name" jdbcType="VARCHAR"/>
+        <result property="sourceUrl" column="source_url" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="localImg" column="local_img" jdbcType="VARCHAR"/>
+        <result property="label" column="label" jdbcType="VARCHAR"/>
+        <result property="originalHref" column="original_href" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="targetHref" column="target_href" jdbcType="VARCHAR"/>
+        <result property="useStatus" column="use_status" jdbcType="VARCHAR"/>
+        <result property="score" column="score" jdbcType="VARCHAR"/>
+        <result property="category" column="category" jdbcType="VARCHAR"/>
+        <result property="ranks" column="ranks" jdbcType="VARCHAR"/>
+        <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+        <result property="doubanUrl" column="douban_url" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="MovieNetworkMap">
+        select
+          id, movie_id, movie_name, director, star, type, country_language, viewing_state, release_time, plot, update_time, is_recommend, img, classify, source_name, source_url, create_time, local_img, label, original_href, description, target_href, use_status, score, category, ranks, user_id, douban_url
+        from movie_network
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="MovieNetworkMap">
+        select
+          id, movie_id, movie_name, director, star, type, country_language, viewing_state, release_time, plot, update_time, is_recommend, img, classify, source_name, source_url, create_time, local_img, label, original_href, description, target_href, use_status, score, category, ranks, user_id, douban_url
+        from movie_network
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="movieId != null and movieId != ''">
+                and movie_id = #{movieId}
+            </if>
+            <if test="movieName != null and movieName != ''">
+                and movie_name = #{movieName}
+            </if>
+            <if test="director != null and director != ''">
+                and director = #{director}
+            </if>
+            <if test="star != null and star != ''">
+                and star = #{star}
+            </if>
+            <if test="type != null and type != ''">
+                and type = #{type}
+            </if>
+            <if test="countryLanguage != null and countryLanguage != ''">
+                and country_language = #{countryLanguage}
+            </if>
+            <if test="viewingState != null and viewingState != ''">
+                and viewing_state = #{viewingState}
+            </if>
+            <if test="releaseTime != null and releaseTime != ''">
+                and release_time = #{releaseTime}
+            </if>
+            <if test="plot != null and plot != ''">
+                and plot = #{plot}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="isRecommend != null">
+                and is_recommend = #{isRecommend}
+            </if>
+            <if test="img != null and img != ''">
+                and img = #{img}
+            </if>
+            <if test="classify != null and classify != ''">
+                and classify = #{classify}
+            </if>
+            <if test="sourceName != null and sourceName != ''">
+                and source_name = #{sourceName}
+            </if>
+            <if test="sourceUrl != null and sourceUrl != ''">
+                and source_url = #{sourceUrl}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="localImg != null and localImg != ''">
+                and local_img = #{localImg}
+            </if>
+            <if test="label != null and label != ''">
+                and label = #{label}
+            </if>
+            <if test="originalHref != null and originalHref != ''">
+                and original_href = #{originalHref}
+            </if>
+            <if test="description != null and description != ''">
+                and description = #{description}
+            </if>
+            <if test="targetHref != null and targetHref != ''">
+                and target_href = #{targetHref}
+            </if>
+            <if test="useStatus != null">
+                and use_status = #{useStatus}
+            </if>
+            <if test="score != null and score != ''">
+                and score = #{score}
+            </if>
+            <if test="category != null and category != ''">
+                and category = #{category}
+            </if>
+            <if test="ranks != null and ranks != ''">
+                and ranks = #{ranks}
+            </if>
+            <if test="userId != null and userId != ''">
+                and user_id = #{userId}
+            </if>
+            <if test="doubanUrl != null and doubanUrl != ''">
+                and douban_url = #{doubanUrl}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from movie_network
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="movieId != null and movieId != ''">
+                and movie_id = #{movieId}
+            </if>
+            <if test="movieName != null and movieName != ''">
+                and movie_name = #{movieName}
+            </if>
+            <if test="director != null and director != ''">
+                and director = #{director}
+            </if>
+            <if test="star != null and star != ''">
+                and star = #{star}
+            </if>
+            <if test="type != null and type != ''">
+                and type = #{type}
+            </if>
+            <if test="countryLanguage != null and countryLanguage != ''">
+                and country_language = #{countryLanguage}
+            </if>
+            <if test="viewingState != null and viewingState != ''">
+                and viewing_state = #{viewingState}
+            </if>
+            <if test="releaseTime != null and releaseTime != ''">
+                and release_time = #{releaseTime}
+            </if>
+            <if test="plot != null and plot != ''">
+                and plot = #{plot}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="isRecommend != null">
+                and is_recommend = #{isRecommend}
+            </if>
+            <if test="img != null and img != ''">
+                and img = #{img}
+            </if>
+            <if test="classify != null and classify != ''">
+                and classify = #{classify}
+            </if>
+            <if test="sourceName != null and sourceName != ''">
+                and source_name = #{sourceName}
+            </if>
+            <if test="sourceUrl != null and sourceUrl != ''">
+                and source_url = #{sourceUrl}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="localImg != null and localImg != ''">
+                and local_img = #{localImg}
+            </if>
+            <if test="label != null and label != ''">
+                and label = #{label}
+            </if>
+            <if test="originalHref != null and originalHref != ''">
+                and original_href = #{originalHref}
+            </if>
+            <if test="description != null and description != ''">
+                and description = #{description}
+            </if>
+            <if test="targetHref != null and targetHref != ''">
+                and target_href = #{targetHref}
+            </if>
+            <if test="useStatus != null">
+                and use_status = #{useStatus}
+            </if>
+            <if test="score != null and score != ''">
+                and score = #{score}
+            </if>
+            <if test="category != null and category != ''">
+                and category = #{category}
+            </if>
+            <if test="ranks != null and ranks != ''">
+                and ranks = #{ranks}
+            </if>
+            <if test="userId != null and userId != ''">
+                and user_id = #{userId}
+            </if>
+            <if test="doubanUrl != null and doubanUrl != ''">
+                and douban_url = #{doubanUrl}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into movie_network(movie_id, movie_name, director, star, type, country_language, viewing_state, release_time, plot, update_time, is_recommend, img, classify, source_name, source_url, create_time, local_img, label, original_href, description, target_href, use_status, score, category, ranks, user_id, douban_url)
+        values (#{movieId}, #{movieName}, #{director}, #{star}, #{type}, #{countryLanguage}, #{viewingState}, #{releaseTime}, #{plot}, #{updateTime}, #{isRecommend}, #{img}, #{classify}, #{sourceName}, #{sourceUrl}, #{createTime}, #{localImg}, #{label}, #{originalHref}, #{description}, #{targetHref}, #{useStatus}, #{score}, #{category}, #{ranks}, #{userId}, #{doubanUrl})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into movie_network(movie_id, movie_name, director, star, type, country_language, viewing_state, release_time, plot, update_time, is_recommend, img, classify, source_name, source_url, create_time, local_img, label, original_href, description, target_href, use_status, score, category, ranks, user_id, douban_url)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.movieId}, #{entity.movieName}, #{entity.director}, #{entity.star}, #{entity.type}, #{entity.countryLanguage}, #{entity.viewingState}, #{entity.releaseTime}, #{entity.plot}, #{entity.updateTime}, #{entity.isRecommend}, #{entity.img}, #{entity.classify}, #{entity.sourceName}, #{entity.sourceUrl}, #{entity.createTime}, #{entity.localImg}, #{entity.label}, #{entity.originalHref}, #{entity.description}, #{entity.targetHref}, #{entity.useStatus}, #{entity.score}, #{entity.category}, #{entity.ranks}, #{entity.userId}, #{entity.doubanUrl})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into movie_network(movie_id, movie_name, director, star, type, country_language, viewing_state, release_time, plot, update_time, is_recommend, img, classify, source_name, source_url, create_time, local_img, label, original_href, description, target_href, use_status, score, category, ranks, user_id, douban_url)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.movieId}, #{entity.movieName}, #{entity.director}, #{entity.star}, #{entity.type}, #{entity.countryLanguage}, #{entity.viewingState}, #{entity.releaseTime}, #{entity.plot}, #{entity.updateTime}, #{entity.isRecommend}, #{entity.img}, #{entity.classify}, #{entity.sourceName}, #{entity.sourceUrl}, #{entity.createTime}, #{entity.localImg}, #{entity.label}, #{entity.originalHref}, #{entity.description}, #{entity.targetHref}, #{entity.useStatus}, #{entity.score}, #{entity.category}, #{entity.ranks}, #{entity.userId}, #{entity.doubanUrl})
+        </foreach>
+        on duplicate key update
+        movie_id = values(movie_id),
+        movie_name = values(movie_name),
+        director = values(director),
+        star = values(star),
+        type = values(type),
+        country_language = values(country_language),
+        viewing_state = values(viewing_state),
+        release_time = values(release_time),
+        plot = values(plot),
+        update_time = values(update_time),
+        is_recommend = values(is_recommend),
+        img = values(img),
+        classify = values(classify),
+        source_name = values(source_name),
+        source_url = values(source_url),
+        create_time = values(create_time),
+        local_img = values(local_img),
+        label = values(label),
+        original_href = values(original_href),
+        description = values(description),
+        target_href = values(target_href),
+        use_status = values(use_status),
+        score = values(score),
+        category = values(category),
+        ranks = values(ranks),
+        user_id = values(user_id),
+        douban_url = values(douban_url)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update movie_network
+        <set>
+            <if test="movieId != null and movieId != ''">
+                movie_id = #{movieId},
+            </if>
+            <if test="movieName != null and movieName != ''">
+                movie_name = #{movieName},
+            </if>
+            <if test="director != null and director != ''">
+                director = #{director},
+            </if>
+            <if test="star != null and star != ''">
+                star = #{star},
+            </if>
+            <if test="type != null and type != ''">
+                type = #{type},
+            </if>
+            <if test="countryLanguage != null and countryLanguage != ''">
+                country_language = #{countryLanguage},
+            </if>
+            <if test="viewingState != null and viewingState != ''">
+                viewing_state = #{viewingState},
+            </if>
+            <if test="releaseTime != null and releaseTime != ''">
+                release_time = #{releaseTime},
+            </if>
+            <if test="plot != null and plot != ''">
+                plot = #{plot},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="isRecommend != null">
+                is_recommend = #{isRecommend},
+            </if>
+            <if test="img != null and img != ''">
+                img = #{img},
+            </if>
+            <if test="classify != null and classify != ''">
+                classify = #{classify},
+            </if>
+            <if test="sourceName != null and sourceName != ''">
+                source_name = #{sourceName},
+            </if>
+            <if test="sourceUrl != null and sourceUrl != ''">
+                source_url = #{sourceUrl},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="localImg != null and localImg != ''">
+                local_img = #{localImg},
+            </if>
+            <if test="label != null and label != ''">
+                label = #{label},
+            </if>
+            <if test="originalHref != null and originalHref != ''">
+                original_href = #{originalHref},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="targetHref != null and targetHref != ''">
+                target_href = #{targetHref},
+            </if>
+            <if test="useStatus != null">
+                use_status = #{useStatus},
+            </if>
+            <if test="score != null and score != ''">
+                score = #{score},
+            </if>
+            <if test="category != null and category != ''">
+                category = #{category},
+            </if>
+            <if test="ranks != null and ranks != ''">
+                ranks = #{ranks},
+            </if>
+            <if test="userId != null and userId != ''">
+                user_id = #{userId},
+            </if>
+            <if test="doubanUrl != null and doubanUrl != ''">
+                douban_url = #{doubanUrl},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from movie_network where id = #{id}
+    </delete>
+
+</mapper>
+
