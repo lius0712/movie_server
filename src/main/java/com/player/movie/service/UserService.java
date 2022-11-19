@@ -30,6 +30,13 @@ public interface UserService {
     Page<User> queryByPage(User user, PageRequest pageRequest);
 
     /**
+     * 登录功能
+     * @param name
+     * @return
+     */
+    User login(String name);
+
+    /**
      * 新增数据
      *
      * @param user 实例对象

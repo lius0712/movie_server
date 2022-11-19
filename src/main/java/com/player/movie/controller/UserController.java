@@ -16,7 +16,7 @@ import javax.annotation.Resource;
  * @since 2022-10-19 13:14:30
  */
 @RestController
-@RequestMapping("user")
+@RequestMapping("users")
 public class UserController {
     /**
      * 服务对象
@@ -54,8 +54,21 @@ public class UserController {
      * @return 新增结果
      */
     @PostMapping
-    public ResponseEntity<User> add(User user) {
+    public ResponseEntity<User> add(@RequestBody User user) {
         return ResponseEntity.ok(this.userService.insert(user));
+    }
+
+    /**
+     * 登录
+     */
+
+    @PostMapping("login")
+    public ResponseEntity<User> login(@RequestBody User userUrl) {
+        User user = userService.login(userUrl.getUsername());
+        if(user == null || !user.getPasswd().equals(userUrl.getPasswd())) {
+            return ResponseEntity.ok(new User());
+        }
+        return ResponseEntity.ok(user);
     }
 
     /**

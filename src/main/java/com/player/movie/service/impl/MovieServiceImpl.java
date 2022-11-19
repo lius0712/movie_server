@@ -2,6 +2,8 @@ package com.player.movie.service.impl;
 
 import com.player.movie.entity.Movie;
 import com.player.movie.dao.MovieDao;
+import com.player.movie.entity.ResultEntity;
+import com.player.movie.entity.ResultUtil;
 import com.player.movie.service.MovieService;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
@@ -9,6 +11,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * (Movie)表服务实现类
@@ -20,6 +23,56 @@ import javax.annotation.Resource;
 public class MovieServiceImpl implements MovieService {
     @Resource
     private MovieDao movieDao;
+
+    @Override
+    public ResultEntity findClassify() {
+        ResultEntity resultEntity = ResultUtil.success(movieDao.findClassify());
+        return resultEntity;
+    }
+
+    @Override
+    public ResultEntity getMovieUrl(String movieId) {
+        ResultEntity resultEntity =  ResultUtil.success(movieDao.getMovieUrl(movieId));
+        return resultEntity;
+    }
+
+    @Override
+    public ResultEntity getKeyWord(String classify) {
+        ResultEntity resultEntity = ResultUtil.success(movieDao.getKeyWord(classify));
+        return resultEntity;
+    }
+
+    @Override
+    public ResultEntity search(String keyword, int pageNum, int pageSize) {
+        int start = (pageNum - 1) * pageSize;
+        Map<String, Long> totalMap = movieDao.total(keyword);
+        ResultEntity resultEntity =  ResultUtil.success(movieDao.search(keyword, start, pageSize), totalMap.get("total"));
+        return resultEntity;
+    }
+
+    @Override
+    public ResultEntity getAllCategoryByClassify(String classsify) {
+        ResultEntity resultEntity = ResultUtil.success(movieDao.getAllCategoryByClassify(classsify));
+        return resultEntity;
+    }
+
+    @Override
+    public ResultEntity getAllCategoryListByPageName(String pageName) {
+        ResultEntity resultEntity =ResultUtil.success(movieDao.getAllCategoryListByPageName(pageName));
+        return resultEntity;
+    }
+
+    @Override
+    public ResultEntity getCategoryList(String classify, String category) {
+        ResultEntity resultEntity =  ResultUtil.success(movieDao.getCategoryList(classify, category));
+        return resultEntity;
+    }
+
+    @Override
+    public ResultEntity getStar(String movieId) {
+        ResultEntity resultEntity =  ResultUtil.success(movieDao.getStar(movieId));
+        return resultEntity;
+    }
 
     /**
      * 通过ID查询单条数据

@@ -45,6 +45,11 @@ public class UserServiceImpl implements UserService {
         return new PageImpl<>(this.userDao.queryAllByLimit(user, pageRequest), pageRequest, total);
     }
 
+    @Override
+    public User login(String name) {
+        return userDao.queryByName(name);
+    }
+
     /**
      * 新增数据
      *

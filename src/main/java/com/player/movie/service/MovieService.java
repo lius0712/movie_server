@@ -1,6 +1,7 @@
 package com.player.movie.service;
 
 import com.player.movie.entity.Movie;
+import com.player.movie.entity.ResultEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
@@ -53,4 +54,19 @@ public interface MovieService {
      */
     boolean deleteById(Integer id);
 
+    ResultEntity findClassify();
+
+    ResultEntity getMovieUrl(String movieId);
+
+    ResultEntity getKeyWord(String classify);
+
+    ResultEntity search(String keyword, int pageNum, int pageSize);
+
+    ResultEntity getAllCategoryByClassify(String classsify);
+
+    ResultEntity getAllCategoryListByPageName(String pageName);
+
+    ResultEntity getCategoryList(String classify, String category);
+
+    ResultEntity getStar(String movieId);
 }

@@ -22,6 +22,13 @@ public interface UserDao {
     User queryById(Integer useid);
 
     /**
+     * 通过name查询用户数据
+     * @param name
+     * @return
+     */
+    User queryByName(String name);
+
+    /**
      * 查询指定行数据
      *
      * @param user 查询条件

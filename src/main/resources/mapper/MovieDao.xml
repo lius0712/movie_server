@@ -33,6 +33,45 @@
         <result property="doubanUrl" column="douban_url" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <select id="findClassify"  resultType="MovieMap">
+        SELECT classify FROM movie GROUP BY classify
+    </select>
+
+    <select id="getMovieUrl" resultType="MovieUrl">
+        SELECT * FROM movie_url WHERE movie_id = #{movie_id}
+    </select>
+
+    <select id="getKeyWord"  resultType="MovieMap">
+        SELECT name,classify FROM movie_network WHERE is_recommend = '1' AND classify = #{classify}
+    </select>
+
+    <select id="search" resultType="Movie">
+        SELECT * FROM movie
+        <include refid="search"></include>
+        limit #{start}, #{pageSize}
+    </select>
+
+    <select id="total" resultType="MovieMap">
+        SELECT count(*) as total FROM movie
+        <include refid="search"></include>
+    </select>
+
+    <select id="getAllCategoryByClassify" resultType="MovieMap">
+        SELECT category,classify FROM category WHERE category != '轮播' AND classify = #{classify} ORDER BY last_update ASC
+    </select>
+
+    <select id="getAllCategoryListByPageName" resultType="MovieMap">
+        SELECT category,classify FROM category WHERE page_name = #{pageName} AND category != '轮播' AND status = '1' order by last_update asc
+    </select>
+
+    <select id="getCategoryList" resultType="Movie">
+        SELECT * FROM movie_network WHERE category = #{category} AND classify = #{classify}
+    </select>
+
+    <select id="getStar" resultType="MovieStar">
+        SELECT * FROM movie_stars WHERE movie_id = #{movieId}
+    </select>
+
     <!--查询单个-->
     <select id="queryById" resultMap="MovieMap">
         select
