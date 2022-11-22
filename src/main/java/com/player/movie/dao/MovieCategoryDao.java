@@ -4,6 +4,7 @@ import com.player.movie.entity.MovieCategory;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.domain.Pageable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * (MovieCategory)表数据库访问层
@@ -79,8 +80,8 @@ public interface MovieCategoryDao {
      */
     int deleteById(Integer id);
 
-    Object getAllCategoryByClassify(String classsify);
+    List<Map<String, String>> getAllCategoryByClassify(String classsify);
 
-    Object getAllCategoryListByPageName(String pageName);
+    List<Map<String, String>> getAllCategoryListByPageName(String pageName);
 }
 

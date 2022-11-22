@@ -84,9 +84,9 @@ public interface MovieDao {
 
     Map<String, Long> total(String keyword);
 
-    Object search(String keyword, int start, int pageSize);
+    List<Movie> search(String keyword, int start, int pageSize);
 
-    Object getCategoryList(String classify, String category);
+    List<Movie> getCategoryList(String classify, String category);
 
 }
 

@@ -1,5 +1,6 @@
 package com.player.movie.dao;
 
+import com.player.movie.entity.Movie;
 import com.player.movie.entity.MovieNetwork;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.domain.Pageable;
@@ -79,6 +80,6 @@ public interface MovieNetworkDao {
      */
     int deleteById(Integer id);
 
-    Object getKeyWord(String classify);
+    Movie getKeyWord(String classify);
 }
 

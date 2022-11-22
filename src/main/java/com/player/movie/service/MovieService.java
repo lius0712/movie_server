@@ -5,6 +5,8 @@ import com.player.movie.entity.ResultEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
+import java.util.List;
+
 /**
  * (Movie)表服务接口
  *
