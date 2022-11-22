@@ -1,6 +1,7 @@
 package com.player.movie.service;
 
 import com.player.movie.entity.MovieUrl;
+import com.player.movie.entity.ResultEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
@@ -53,4 +54,5 @@ public interface MovieUrlService {
      */
     boolean deleteById(Integer id);
 
+    ResultEntity getMovieUrl(String movieId);
 }

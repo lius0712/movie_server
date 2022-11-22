@@ -33,6 +33,10 @@
         <result property="doubanUrl" column="douban_url" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <select id="getKeyWord"  resultMap="MovieNetworkMap">
+        SELECT name,classify FROM movie_network WHERE is_recommend = '1' AND classify = #{classify}
+    </select>
+
     <!--查询单个-->
     <select id="queryById" resultMap="MovieNetworkMap">
         select

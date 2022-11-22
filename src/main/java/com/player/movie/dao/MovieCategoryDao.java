@@ -79,5 +79,8 @@ public interface MovieCategoryDao {
      */
     int deleteById(Integer id);
 
+    Object getAllCategoryByClassify(String classsify);
+
+    Object getAllCategoryListByPageName(String pageName);
 }
 

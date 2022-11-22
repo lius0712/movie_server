@@ -2,6 +2,8 @@ package com.player.movie.service.impl;
 
 import com.player.movie.entity.MovieNetwork;
 import com.player.movie.dao.MovieNetworkDao;
+import com.player.movie.entity.ResultEntity;
+import com.player.movie.entity.ResultUtil;
 import com.player.movie.service.MovieNetworkService;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
@@ -78,5 +80,11 @@ public class MovieNetworkServiceImpl implements MovieNetworkService {
     @Override
     public boolean deleteById(Integer id) {
         return this.movieNetworkDao.deleteById(id) > 0;
+    }
+
+    @Override
+    public ResultEntity getKeyWord(String classify) {
+        ResultEntity resultEntity = ResultUtil.success(movieNetworkDao.getKeyWord(classify));
+        return resultEntity;
     }
 }

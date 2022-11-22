@@ -56,17 +56,9 @@ public interface MovieService {
 
     ResultEntity findClassify();
 
-    ResultEntity getMovieUrl(String movieId);
-
-    ResultEntity getKeyWord(String classify);
 
     ResultEntity search(String keyword, int pageNum, int pageSize);
 
-    ResultEntity getAllCategoryByClassify(String classsify);
-
-    ResultEntity getAllCategoryListByPageName(String pageName);
-
     ResultEntity getCategoryList(String classify, String category);
 
-    ResultEntity getStar(String movieId);
 }

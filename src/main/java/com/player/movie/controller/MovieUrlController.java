@@ -1,6 +1,7 @@
 package com.player.movie.controller;
 
 import com.player.movie.entity.MovieUrl;
+import com.player.movie.entity.ResultEntity;
 import com.player.movie.service.MovieUrlService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -31,6 +32,14 @@ public class MovieUrlController {
      * @param pageRequest      分页对象
      * @return 查询结果
      */
+
+    @GetMapping("getMovieUrl")
+    public ResultEntity getMovieUrl(
+            @RequestParam("movieId") String movieId
+    ) {
+        return movieUrlService.getMovieUrl(movieId);
+    }
+
     @GetMapping
     public ResponseEntity<Page<MovieUrl>> queryByPage(MovieUrl movieUrl, PageRequest pageRequest) {
         return ResponseEntity.ok(this.movieUrlService.queryByPage(movieUrl, pageRequest));

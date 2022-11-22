@@ -14,6 +14,10 @@
         <result property="playGroup" column="play_group" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <select id="getMovieUrl" resultMap="MovieUrlMap">
+        SELECT * FROM movie_url WHERE movie_id = #{movie_id}
+    </select>
+
     <!--查询单个-->
     <select id="queryById" resultMap="MovieUrlMap">
         select

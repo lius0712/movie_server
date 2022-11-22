@@ -4,6 +4,7 @@ import com.player.movie.entity.Movie;
 import com.player.movie.entity.ResultEntity;
 import com.player.movie.service.MovieService;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
@@ -23,26 +24,19 @@ import java.util.List;
 @RequestMapping("movies")
 public class MovieController {
 
+    /**
+     * 服务对象
+     */
+    @Resource
+    private MovieService movieService;
+
+
     @ApiOperation("获取分类信息")
     @GetMapping("findClassify")
     public ResultEntity findClassify() {
         return movieService.findClassify();
     }
 
-    @GetMapping("getMovieUrl")
-    public ResultEntity getMovieUrl(
-            @RequestParam("movieId") String movieId
-    ) {
-        return movieService.getMovieUrl(movieId);
-    }
-
-    @ApiOperation("按照类型获取推荐影片")
-    @GetMapping("/getKeyWord")
-    public ResultEntity getKeyWord(
-            @RequestParam("classify") String classify
-    ) {
-        return movieService.getKeyWord(classify);
-    }
 
     @GetMapping("/search")
     public ResultEntity search(
@@ -53,19 +47,6 @@ public class MovieController {
         return movieService.search(keyword, pageNum, pageSize);
     }
 
-    @GetMapping("/getAllCategoryByClassify")
-    public ResultEntity getAllCategoryByClassify(
-            @RequestParam("classify") String classsify
-    ) {
-        return movieService.getAllCategoryByClassify(classsify);
-    }
-
-    @GetMapping("/getAllCategoryListByPageName")
-    public ResultEntity getAllCategoryListByPageName(
-            @RequestParam("pageName") String pageName
-    ) {
-        return movieService.getAllCategoryListByPageName(pageName);
-    }
 
     @GetMapping("/getCategoryList")
     public ResultEntity getCategoryList(
@@ -75,19 +56,6 @@ public class MovieController {
         return movieService.getCategoryList(classify, category);
     }
 
-    @GetMapping("/getStar")
-    public ResultEntity getStar(
-            @RequestParam("movieId") String movieId
-    ) {
-        return movieService.getStar(movieId);
-    }
-
-
-    /**
-     * 服务对象
-     */
-    @Resource
-    private MovieService movieService;
 
 
     @GetMapping

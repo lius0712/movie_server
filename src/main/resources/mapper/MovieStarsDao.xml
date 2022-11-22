@@ -15,6 +15,10 @@
         <result property="works" column="works" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <select id="getStar" resultMap="MovieStarsMap">
+        SELECT * FROM movie_stars WHERE movie_id = #{movieId}
+    </select>
+
     <!--查询单个-->
     <select id="queryById" resultMap="MovieStarsMap">
         select

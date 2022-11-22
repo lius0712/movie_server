@@ -1,6 +1,7 @@
 package com.player.movie.controller;
 
 import com.player.movie.entity.MovieStars;
+import com.player.movie.entity.ResultEntity;
 import com.player.movie.service.MovieStarsService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,6 +24,13 @@ public class MovieStarsController {
      */
     @Resource
     private MovieStarsService movieStarsService;
+
+    @GetMapping("/getStar")
+    public ResultEntity getStar(
+            @RequestParam("movieId") String movieId
+    ) {
+        return movieStarsService.getStar(movieId);
+    }
 
     /**
      * 分页查询

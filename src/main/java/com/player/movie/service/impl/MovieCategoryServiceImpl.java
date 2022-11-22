@@ -2,7 +2,10 @@ package com.player.movie.service.impl;
 
 import com.player.movie.entity.MovieCategory;
 import com.player.movie.dao.MovieCategoryDao;
+import com.player.movie.entity.ResultEntity;
+import com.player.movie.entity.ResultUtil;
 import com.player.movie.service.MovieCategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -78,5 +81,17 @@ public class MovieCategoryServiceImpl implements MovieCategoryService {
     @Override
     public boolean deleteById(Integer id) {
         return this.movieCategoryDao.deleteById(id) > 0;
+    }
+
+    @Override
+    public ResultEntity getAllCategoryByClassify(String classsify) {
+        ResultEntity resultEntity = ResultUtil.success(movieCategoryDao.getAllCategoryByClassify(classsify));
+        return resultEntity;
+    }
+
+    @Override
+    public ResultEntity getAllCategoryListByPageName(String pageName) {
+        ResultEntity resultEntity =ResultUtil.success(movieCategoryDao.getAllCategoryListByPageName(pageName));
+        return resultEntity;
     }
 }

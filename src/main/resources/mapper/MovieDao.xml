@@ -37,13 +37,6 @@
         SELECT classify FROM movie GROUP BY classify
     </select>
 
-    <select id="getMovieUrl" resultType="com.player.movie.entity.MovieUrl">
-        SELECT * FROM movie_url WHERE movie_id = #{movie_id}
-    </select>
-
-    <select id="getKeyWord"  resultType="Map">
-        SELECT name,classify FROM movie_network WHERE is_recommend = '1' AND classify = #{classify}
-    </select>
 
     <sql id="search">
         WHERE name like CONCAT('%',#{keyword},'%') OR star like CONCAT('%',#{keyword},'%') OR director like CONCAT('%',#{keyword},'%') OR director like CONCAT('%',#{keyword},'%')  OR type like CONCAT('%',#{keyword},'%') ORDER BY update_time DESC
@@ -60,20 +53,8 @@
         <include refid="search"></include>
     </select>
 
-    <select id="getAllCategoryByClassify" resultType="Map">
-        SELECT category,classify FROM category WHERE category != '轮播' AND classify = #{classify} ORDER BY last_update ASC
-    </select>
-
-    <select id="getAllCategoryListByPageName" resultType="Map">
-        SELECT category,classify FROM category WHERE page_name = #{pageName} AND category != '轮播' AND status = '1' order by last_update asc
-    </select>
-
-    <select id="getCategoryList" resultType="com.player.movie.entity.Movie">
-        SELECT * FROM movie_network WHERE category = #{category} AND classify = #{classify}
-    </select>
-
-    <select id="getStar" resultType="com.player.movie.entity.MovieStars">
-        SELECT * FROM movie_stars WHERE movie_id = #{movieId}
+    <select id="getCategoryList" resultMap="MovieMap">
+        SELECT * FROM movie WHERE category = #{category} AND classify = #{classify}
     </select>
 
     <!--查询单个-->

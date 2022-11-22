@@ -1,7 +1,9 @@
 package com.player.movie.controller;
 
 import com.player.movie.entity.MovieNetwork;
+import com.player.movie.entity.ResultEntity;
 import com.player.movie.service.MovieNetworkService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +33,15 @@ public class MovieNetworkController {
      * @param pageRequest      分页对象
      * @return 查询结果
      */
+
+    @ApiOperation("按照类型获取推荐影片")
+    @GetMapping("/getKeyWord")
+    public ResultEntity getKeyWord(
+            @RequestParam("classify") String classify
+    ) {
+        return movieNetworkService.getKeyWord(classify);
+    }
+
     @GetMapping
     public ResponseEntity<Page<MovieNetwork>> queryByPage(MovieNetwork movieNetwork, PageRequest pageRequest) {
         return ResponseEntity.ok(this.movieNetworkService.queryByPage(movieNetwork, pageRequest));

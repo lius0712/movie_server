@@ -1,6 +1,7 @@
 package com.player.movie.controller;
 
 import com.player.movie.entity.MovieCategory;
+import com.player.movie.entity.ResultEntity;
 import com.player.movie.service.MovieCategoryService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,6 +24,21 @@ public class MovieCategoryController {
      */
     @Resource
     private MovieCategoryService movieCategoryService;
+
+    @GetMapping("/getAllCategoryByClassify")
+    public ResultEntity getAllCategoryByClassify(
+            @RequestParam("classify") String classsify
+    ) {
+        return movieCategoryService.getAllCategoryByClassify(classsify);
+    }
+
+    @GetMapping("/getAllCategoryListByPageName")
+    public ResultEntity getAllCategoryListByPageName(
+            @RequestParam("pageName") String pageName
+    ) {
+        return movieCategoryService.getAllCategoryListByPageName(pageName);
+    }
+
 
     /**
      * 分页查询

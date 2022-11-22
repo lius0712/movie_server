@@ -79,5 +79,6 @@ public interface MovieNetworkDao {
      */
     int deleteById(Integer id);
 
+    Object getKeyWord(String classify);
 }
 

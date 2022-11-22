@@ -2,6 +2,8 @@ package com.player.movie.service.impl;
 
 import com.player.movie.entity.MovieUrl;
 import com.player.movie.dao.MovieUrlDao;
+import com.player.movie.entity.ResultEntity;
+import com.player.movie.entity.ResultUtil;
 import com.player.movie.service.MovieUrlService;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
@@ -78,5 +80,11 @@ public class MovieUrlServiceImpl implements MovieUrlService {
     @Override
     public boolean deleteById(Integer id) {
         return this.movieUrlDao.deleteById(id) > 0;
+    }
+
+    @Override
+    public ResultEntity getMovieUrl(String movieId) {
+        ResultEntity resultEntity =  ResultUtil.success(movieUrlDao.getMovieUrl(movieId));
+        return resultEntity;
     }
 }

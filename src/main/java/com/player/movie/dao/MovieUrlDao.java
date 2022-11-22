@@ -79,5 +79,6 @@ public interface MovieUrlDao {
      */
     int deleteById(Integer id);
 
+    Object getMovieUrl(String movieId);
 }
 

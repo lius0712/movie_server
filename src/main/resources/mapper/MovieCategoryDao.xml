@@ -13,6 +13,18 @@
         <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
+    <select id="getAllCategoryListByPageName" resultMap="MovieCategoryMap">
+        SELECT category,classify
+        FROM movie_category
+        WHERE page_name = #{pageName} AND category != 'carousel' AND status = '1' order by update_time asc
+    </select>
+
+    <select id="getAllCategoryByClassify" resultMap="MovieCategoryMap">
+        SELECT category,classify
+        FROM movie_category
+        WHERE category != 'carousel' AND classify = #{classify} ORDER BY update_time ASC
+    </select>
+
     <!--查询单个-->
     <select id="queryById" resultMap="MovieCategoryMap">
         select

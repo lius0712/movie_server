@@ -31,34 +31,10 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public ResultEntity getMovieUrl(String movieId) {
-        ResultEntity resultEntity =  ResultUtil.success(movieDao.getMovieUrl(movieId));
-        return resultEntity;
-    }
-
-    @Override
-    public ResultEntity getKeyWord(String classify) {
-        ResultEntity resultEntity = ResultUtil.success(movieDao.getKeyWord(classify));
-        return resultEntity;
-    }
-
-    @Override
     public ResultEntity search(String keyword, int pageNum, int pageSize) {
         int start = (pageNum - 1) * pageSize;
         Map<String, Long> totalMap = movieDao.total(keyword);
         ResultEntity resultEntity =  ResultUtil.success(movieDao.search(keyword, start, pageSize), totalMap.get("total"));
-        return resultEntity;
-    }
-
-    @Override
-    public ResultEntity getAllCategoryByClassify(String classsify) {
-        ResultEntity resultEntity = ResultUtil.success(movieDao.getAllCategoryByClassify(classsify));
-        return resultEntity;
-    }
-
-    @Override
-    public ResultEntity getAllCategoryListByPageName(String pageName) {
-        ResultEntity resultEntity =ResultUtil.success(movieDao.getAllCategoryListByPageName(pageName));
         return resultEntity;
     }
 
@@ -68,11 +44,6 @@ public class MovieServiceImpl implements MovieService {
         return resultEntity;
     }
 
-    @Override
-    public ResultEntity getStar(String movieId) {
-        ResultEntity resultEntity =  ResultUtil.success(movieDao.getStar(movieId));
-        return resultEntity;
-    }
 
     /**
      * 通过ID查询单条数据

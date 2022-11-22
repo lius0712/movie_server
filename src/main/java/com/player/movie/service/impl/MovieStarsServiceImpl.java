@@ -2,6 +2,8 @@ package com.player.movie.service.impl;
 
 import com.player.movie.entity.MovieStars;
 import com.player.movie.dao.MovieStarsDao;
+import com.player.movie.entity.ResultEntity;
+import com.player.movie.entity.ResultUtil;
 import com.player.movie.service.MovieStarsService;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
@@ -78,5 +80,11 @@ public class MovieStarsServiceImpl implements MovieStarsService {
     @Override
     public boolean deleteById(Integer id) {
         return this.movieStarsDao.deleteById(id) > 0;
+    }
+
+    @Override
+    public ResultEntity getStar(String movieId) {
+        ResultEntity resultEntity =  ResultUtil.success(movieStarsDao.getStar(movieId));
+        return resultEntity;
     }
 }

@@ -79,5 +79,6 @@ public interface MovieStarsDao {
      */
     int deleteById(Integer id);
 
+    Object getStar(String movieId);
 }
 

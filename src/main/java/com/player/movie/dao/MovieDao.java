@@ -82,20 +82,11 @@ public interface MovieDao {
 
     List<Map<String, String>> findClassify();
 
-    Object getMovieUrl(String movieId);
-
-    Object getKeyWord(String classify);
-
     Map<String, Long> total(String keyword);
 
     Object search(String keyword, int start, int pageSize);
 
-    Object getAllCategoryByClassify(String classsify);
-
-    Object getAllCategoryListByPageName(String pageName);
-
     Object getCategoryList(String classify, String category);
 
-    Object getStar(String movieId);
 }
 
