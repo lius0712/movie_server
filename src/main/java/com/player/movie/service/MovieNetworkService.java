@@ -55,4 +55,6 @@ public interface MovieNetworkService {
     boolean deleteById(Integer id);
 
     ResultEntity getKeyWord(String classify);
+
+    ResultEntity getTopMovieList(String classify, String category);
 }

@@ -34,7 +34,16 @@
     </resultMap>
 
     <select id="getKeyWord"  resultMap="MovieNetworkMap">
-        SELECT name,classify FROM movie_network WHERE is_recommend = '1' AND classify = #{classify}
+        SELECT movie_name,classify FROM movie_network WHERE is_recommend = '1' AND classify = #{classify}
+    </select>
+
+    <select id="getTopMovieList" resultMap="MovieNetworkMap">
+        SELECT * FROM movie_network WHERE classify = #{classify}
+        <if test="category != '' and category != null">
+            and classify = #{classify}
+        </if>
+        order by create_time desc
+        limit 0,20
     </select>
 
     <!--查询单个-->

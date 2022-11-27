@@ -63,4 +63,5 @@ public interface MovieService {
 
     ResultEntity getCategoryList(String classify, String category);
 
+    ResultEntity getRecommend(String classify);
 }

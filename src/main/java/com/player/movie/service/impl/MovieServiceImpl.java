@@ -44,6 +44,12 @@ public class MovieServiceImpl implements MovieService {
         return resultEntity;
     }
 
+    @Override
+    public ResultEntity getRecommend(String classify) {
+        ResultEntity resultEntity = ResultUtil.success(movieDao.getRecommend(classify));
+        return resultEntity;
+    }
+
 
     /**
      * 通过ID查询单条数据

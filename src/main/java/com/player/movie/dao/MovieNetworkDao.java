@@ -80,6 +80,8 @@ public interface MovieNetworkDao {
      */
     int deleteById(Integer id);
 
-    Movie getKeyWord(String classify);
+    List<MovieNetwork> getKeyWord(String classify);
+
+    List<MovieNetwork> getTopMovieList(String classify, String category);
 }
 

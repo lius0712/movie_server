@@ -87,4 +87,10 @@ public class MovieNetworkServiceImpl implements MovieNetworkService {
         ResultEntity resultEntity = ResultUtil.success(movieNetworkDao.getKeyWord(classify));
         return resultEntity;
     }
+
+    @Override
+    public ResultEntity getTopMovieList(String classify, String category) {
+        ResultEntity resultEntity =  ResultUtil.success(movieNetworkDao.getTopMovieList(classify, category));
+        return resultEntity;
+    }
 }

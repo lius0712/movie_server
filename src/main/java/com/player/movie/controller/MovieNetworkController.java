@@ -26,13 +26,14 @@ public class MovieNetworkController {
     @Resource
     private MovieNetworkService movieNetworkService;
 
-    /**
-     * 分页查询
-     *
-     * @param movieNetwork 筛选条件
-     * @param pageRequest      分页对象
-     * @return 查询结果
-     */
+
+    @GetMapping("/getTopMovieList")
+    public ResultEntity getTopMovieList(
+            @RequestParam("classify") String classify,
+            @RequestParam(value = "category",required = false) String category
+    ) {
+        return movieNetworkService.getTopMovieList(classify, category);
+    }
 
     @ApiOperation("按照类型获取推荐影片")
     @GetMapping("/getKeyWord")

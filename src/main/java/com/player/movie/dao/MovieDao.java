@@ -88,5 +88,6 @@ public interface MovieDao {
 
     List<Movie> getCategoryList(String classify, String category);
 
+    List<Movie> getRecommend(String classify);
 }
 

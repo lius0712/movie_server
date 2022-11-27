@@ -37,6 +37,11 @@ public class MovieController {
         return movieService.findClassify();
     }
 
+    @GetMapping("/getRecommend")
+    public ResultEntity getRecommend(@RequestParam("classify") String classify) {
+        return movieService.getRecommend(classify);
+    }
+
 
     @GetMapping("/search")
     public ResultEntity search(

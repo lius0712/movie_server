@@ -33,8 +33,12 @@
         <result property="doubanUrl" column="douban_url" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <select id="findClassify"  resultType="Map">
+    <select id="findClassify"  resultMap="MovieMap">
         SELECT classify FROM movie GROUP BY classify
+    </select>
+
+    <select id="getRecommend" resultMap="MovieMap">
+        SELECT * FROM movie WHERE classify = #{classify} ORDER BY create_time DESC LIMIT 0,20
     </select>
 
 
@@ -42,13 +46,13 @@
         WHERE name like CONCAT('%',#{keyword},'%') OR star like CONCAT('%',#{keyword},'%') OR director like CONCAT('%',#{keyword},'%') OR director like CONCAT('%',#{keyword},'%')  OR type like CONCAT('%',#{keyword},'%') ORDER BY update_time DESC
     </sql>
 
-    <select id="search" resultType="com.player.movie.entity.Movie">
+    <select id="search" resultMap="MovieMap">
         SELECT * FROM movie
         <include refid="search"></include>
         limit #{start}, #{pageSize}
     </select>
 
-    <select id="total" resultType="Map">
+    <select id="total" resultMap="MovieMap">
         SELECT count(*) as total FROM movie
         <include refid="search"></include>
     </select>
